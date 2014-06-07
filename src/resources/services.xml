@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="tcpService" class="beans.TCPService" init-method="start">
+        <property name="messageBuilder" ref="requestBuilder"/>
+        <property name="port" value="81"/>
+
+    </bean>
+
+    <bean id="requestBuilder" class="beans.RequestBuilder">
+        <property name="dataMapper" ref="dataMapper"/>
+
+    </bean>
+
+    <bean id="dataMapper" class="core.DbMapper" init-method="init">
+        <property name="dbc" ref="dBConnection"/>
+    </bean>
+
+    <bean id="dBConnection" class="core.DBConnection">
+        <property name="userName" value="root"/>
+        <property name="password" value="java"/>
+        <property name="dbms" value="mysql"/>
+        <property name="serverName" value="localhost"/>
+        <property name="portNumber" value="3306"/>
+        <property name="databaseName" value="mapper"/>
+
+    </bean>
+
+
+
+    <!--<bean id="lop" class="...">-->
+    <!--&lt;!&ndash; collaborators and configuration for this bean go here &ndash;&gt;-->
+    <!--</bean>-->
+
+    <!-- more bean definitions go here -->
+
+</beans>
